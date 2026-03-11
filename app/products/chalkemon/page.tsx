@@ -273,12 +273,12 @@ export default function ChalkemonPage() {
         <SectionHeader label="In the Wild" cn="使用场景" lang={lang} />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0.5 mt-8">
           {[
-            "/photos/DSC01215.png",
-            "/photos/DSC01234.png",
-            "/photos/DSC01246.png",
-            "/photos/DSC01252.png",
-            "/photos/DSC01270.png",
-            "/photos/DSC01277.png",
+            "/photos-web/DSC01215.jpg",
+            "/photos-web/DSC01234.jpg",
+            "/photos-web/DSC01246.jpg",
+            "/photos-web/DSC01252.jpg",
+            "/photos-web/DSC01270.jpg",
+            "/photos-web/DSC01277.jpg",
           ].map((src) => (
             <div key={src} className="relative aspect-[3/4] bg-abc-gray-card overflow-hidden">
               <Image src={src} alt="Chalkemon in use" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
