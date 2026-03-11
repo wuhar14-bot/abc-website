@@ -46,9 +46,9 @@ export default function Home() {
           >
             {cn ? (
               <>
-                奇奇怪怪，偏偏好用。
+                Oddly useful. Always FUNctional.
                 <br />
-                认识 Chalkemon — 你的粉袋小精灵。
+                认识 Chalkemon 粉袋精灵。
               </>
             ) : (
               <>
@@ -87,9 +87,9 @@ export default function Home() {
         >
           {Array(8)
             .fill(
-              cn
-                ? "奇奇怪怪，偏偏好用。★ #非爬不可 ★ "
-                : "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "
+              {cn
+                ? "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "
+                : "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "}
             )
             .join("")}
         </div>
@@ -148,19 +148,9 @@ export default function Home() {
               //// {cn ? "品牌宣言" : "Manifesto"}
             </div>
             <blockquote className="text-[clamp(20px,4vw,42px)] font-bold max-w-[800px] leading-snug mb-8">
-              {cn ? (
-                <>
-                  奇奇怪怪，
-                  <br />
-                  <span className="text-abc-red">偏偏好用。</span>
-                </>
-              ) : (
-                <>
-                  Oddly useful.
-                  <br />
-                  <span className="text-abc-red">Always FUNctional.</span>
-                </>
-              )}
+              Oddly useful.
+              <br />
+              <span className="text-abc-red">Always FUNctional.</span>
             </blockquote>
             <Link
               href="/about"
