@@ -86,11 +86,7 @@ export default function Home() {
           style={{ animation: "marquee 24s linear infinite" }}
         >
           {Array(8)
-            .fill(
-              {cn
-                ? "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "
-                : "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "}
-            )
+            .fill("ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ ")
             .join("")}
         </div>
       </div>
