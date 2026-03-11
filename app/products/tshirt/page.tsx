@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
+import { useLang } from "@/lib/lang";
 
 const SIZES = ["S", "M", "L", "XL"];
 
@@ -12,17 +13,26 @@ const COLORS = [
   { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-pdp.png" },
 ];
 
+const FEATURES = [
+  { en: "Oversized streetwear fit", cn: "宽松街头廓形" },
+  { en: "Washed-out dark gray cotton", cn: "水洗做旧棉料" },
+  { en: "Hand-lettered back print", cn: "手写体背印" },
+  { en: "ABC logo on chest", cn: "胸前ABC logo" },
+  { en: "Limited run — no restocks", cn: "限量发售，不补货" },
+];
+
 export default function TshirtPage() {
   const [size, setSize] = useState("M");
   const [color, setColor] = useState(COLORS[0]);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const { lang } = useLang();
 
   const handleAddToCart = () => {
     addItem({
       id: `tshirt-${color.id}`,
       name: "ABC TEE",
-      variant: `${color.name} / ${size}`,
+      variant: `${lang === "cn" ? color.cn : color.name} / ${size}`,
       price: 280,
     });
     setAdded(true);
@@ -31,15 +41,15 @@ export default function TshirtPage() {
 
   return (
     <div className="pt-[60px] min-h-screen">
-      {/* ═══ PDP Hero — Decision #8: left image, right text ═══ */}
       <section className="product-grid border-b border-abc-gray-line px-6 py-16 max-w-[1200px] mx-auto grid grid-cols-2 gap-20 items-center">
         {/* Left: image */}
         <div>
-          {/* Breadcrumb */}
           <div className="font-mono text-[10px] tracking-[0.15em] uppercase mb-6 flex gap-2">
-            <Link href="/products" className="nav-link text-abc-gray-mid no-underline">Shop</Link>
+            <Link href="/products" className="nav-link text-abc-gray-mid no-underline">
+              {lang === "cn" ? "商店" : "Shop"}
+            </Link>
             <span className="text-abc-gray-line">/</span>
-            <span className="text-abc-gray-subtle">T-Shirt</span>
+            <span className="text-abc-gray-subtle">{lang === "cn" ? "短袖" : "T-Shirt"}</span>
           </div>
 
           <div className="relative aspect-square bg-abc-gray-card border border-abc-gray-line overflow-hidden">
@@ -72,23 +82,23 @@ export default function TshirtPage() {
             HK$280
           </div>
 
-          {/* Description */}
           <div className="text-sm text-abc-gray-text leading-relaxed max-w-[480px] mb-8">
-            Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back.
-            ABC logo on the front chest. Limited run — no restocks.
+            {lang === "cn"
+              ? "宽松街头短袖，背面手写体「AnythingButClimbing」印花，胸前ABC logo。限量发售，不补货。"
+              : <>Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back. ABC logo on the front chest. Limited run — no restocks.</>}
           </div>
 
           {/* Color selector */}
           <div className="mb-6">
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-abc-gray-subtle mb-3">
-              Color — {color.name} · {color.cn}
+              {lang === "cn" ? `颜色 — ${color.cn}` : `Color — ${color.name}`}
             </div>
             <div className="flex gap-3">
               {COLORS.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => setColor(c)}
-                  title={`${c.name} · ${c.cn}`}
+                  title={lang === "cn" ? c.cn : c.name}
                   className="w-8 h-8 rounded-full cursor-pointer outline-none"
                   style={{
                     background: c.hex,
@@ -101,10 +111,10 @@ export default function TshirtPage() {
             </div>
           </div>
 
-          {/* Size selector — NO quantity selector (Decision #8) */}
+          {/* Size selector */}
           <div className="mb-8">
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-abc-gray-subtle mb-3">
-              Size — {size}
+              {lang === "cn" ? `尺码 — ${size}` : `Size — ${size}`}
             </div>
             <div className="flex gap-2 flex-wrap">
               {SIZES.map((s) => (
@@ -127,19 +137,13 @@ export default function TshirtPage() {
 
           {/* Features */}
           <div className="mb-10">
-            {[
-              "Oversized streetwear fit",
-              "Washed-out dark gray cotton",
-              "Hand-lettered back print",
-              "ABC logo on chest",
-              "Limited run — no restocks",
-            ].map((f) => (
+            {FEATURES.map((f) => (
               <div
-                key={f}
+                key={f.en}
                 className="flex gap-3 pb-2.5 mb-2.5 border-b border-abc-gray-line font-mono text-xs tracking-[0.1em] text-[#888] uppercase"
               >
                 <span className="text-abc-red">+</span>
-                {f}
+                {lang === "cn" ? f.cn : f.en}
               </div>
             ))}
           </div>
@@ -153,11 +157,13 @@ export default function TshirtPage() {
               transition: "background 150ms ease",
             }}
           >
-            {added ? "✓ Added to Cart" : "Add to Cart — HK$280"}
+            {added
+              ? (lang === "cn" ? "✓ 已加入购物车" : "✓ Added to Cart")
+              : (lang === "cn" ? "加入购物车 — HK$280" : "Add to Cart — HK$280")}
           </button>
 
           <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mt-4 text-center">
-            Free shipping HK · Worldwide from HK$120
+            {lang === "cn" ? "香港免运费 · 国际配送 HK$120起" : "Free shipping HK · Worldwide from HK$120"}
           </div>
         </div>
       </section>
