@@ -43,3 +43,6 @@ next-env.d.ts
 # large asset folders (raw photos / ref images — not needed for deployment)
 /public/photos/
 /public/ref/
+
+# web-optimised photos are committed instead
+# /public/photos-web/  ← intentionally NOT ignored

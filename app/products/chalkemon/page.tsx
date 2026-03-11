@@ -14,8 +14,10 @@ const COLORWAYS = [
     border: "#444",
     price: 380,
     photos: [
-      "/images/chalkemon-pdp.png",
-      "/images/chalkemon-card.png",
+      "/photos-web/DSC01208.jpg",
+      "/photos-web/DSC01237.jpg",
+      "/photos-web/DSC01266.jpg",
+      "/photos-web/DSC01283.jpg",
     ],
   },
   {
@@ -25,7 +27,7 @@ const COLORWAYS = [
     color: "#8B6914",
     border: "#c49a2a",
     price: 420,
-    photos: ["/images/chalkemon-pdp.png"],
+    photos: ["/photos-web/DSC01252.jpg"],
   },
   {
     id: "dolong-odo",
@@ -34,7 +36,7 @@ const COLORWAYS = [
     color: "#c8c5c0",
     border: "#888",
     price: 420,
-    photos: ["/images/chalkemon-pdp.png"],
+    photos: ["/photos-web/DSC01256.jpg"],
   },
 ];
 
