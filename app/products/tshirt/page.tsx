@@ -18,7 +18,6 @@ const FEATURES = [
   { en: "Washed-out dark gray cotton", cn: "水洗做旧棉料" },
   { en: "Hand-lettered back print", cn: "手写体背印" },
   { en: "ABC logo on chest", cn: "胸前ABC logo" },
-  { en: "Limited run — no restocks", cn: "限量发售，不补货" },
 ];
 
 export default function TshirtPage() {
@@ -84,8 +83,8 @@ export default function TshirtPage() {
 
           <div className="text-sm text-abc-gray-text leading-relaxed max-w-[480px] mb-8">
             {lang === "cn"
-              ? "宽松街头短袖，背面手写体「AnythingButClimbing」印花，胸前ABC logo。限量发售，不补货。"
-              : <>Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back. ABC logo on the front chest. Limited run — no restocks.</>}
+              ? "宽松街头短袖，背面手写体「AnythingButClimbing」印花，胸前ABC logo。"
+              : <>Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back. ABC logo on the front chest.</>}
           </div>
 
           {/* Color selector */}
