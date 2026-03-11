@@ -82,7 +82,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="max-w-[1200px] mx-auto mt-8 border-t border-abc-gray-line pt-6 text-abc-gray-mid">
-        © 2025 Anything But Climbing. All rights reserved.
+        © 2025 AnythingButClimbing. All rights reserved.
       </div>
     </footer>
   );

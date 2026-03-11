@@ -112,7 +112,7 @@ export default function Home() {
             href="/products/tshirt"
             imageSrc="/images/tshirt-card.png"
             label="ABC TEE"
-            sub="Anything But Climbing · T-Shirt"
+            sub="AnythingButClimbing · T-Shirt"
             price="HK$280"
             tag="LIMITED"
           />
