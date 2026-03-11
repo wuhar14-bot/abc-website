@@ -1,8 +1,13 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import HeroBrandImage from "@/components/HeroBrandImage";
+import { useLang } from "@/lib/lang";
 
 export default function Home() {
+  const { lang } = useLang();
+  const cn = lang === "cn";
+
   return (
     <div className="pt-[60px]">
       {/* ═══ HERO ═══ */}
@@ -26,28 +31,34 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-[800px]">
-          {/* Pre-heading — fades in after typing completes */}
           <div
             className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-red mb-8 opacity-0"
             style={{ animation: "fadeIn 0.6s ease 2.7s forwards" }}
           >
-            — New Drop Available —
+            {cn ? "— 新品上架 —" : "— New Drop Available —"}
           </div>
 
-          {/* Main heading — Brand image wipe reveal */}
           <HeroBrandImage />
 
-          {/* Subtext — fades in after typing */}
           <p
             className="font-mono text-[13px] tracking-[0.2em] uppercase text-abc-gray-subtle max-w-[420px] mx-auto mb-12 leading-relaxed opacity-0"
             style={{ animation: "fadeIn 0.6s ease 2.7s forwards" }}
           >
-            Oddly useful. Always FUNctional.
-            <br />
-            Meet Chalkemon — your chalk bag companion.
+            {cn ? (
+              <>
+                奇奇怪怪，偏偏好用。
+                <br />
+                认识 Chalkemon — 你的粉袋小精灵。
+              </>
+            ) : (
+              <>
+                Oddly useful. Always FUNctional.
+                <br />
+                Meet Chalkemon — your chalk bag companion.
+              </>
+            )}
           </p>
 
-          {/* CTA buttons — fade in after typing */}
           <div
             className="flex gap-4 justify-center flex-wrap opacity-0"
             style={{ animation: "fadeIn 0.6s ease 2.9s forwards" }}
@@ -56,13 +67,13 @@ export default function Home() {
               href="/products/chalkemon"
               className="btn-red bg-abc-red text-white px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline font-semibold inline-block"
             >
-              Shop Chalkemon
+              {cn ? "入手 Chalkemon" : "Shop Chalkemon"}
             </Link>
             <Link
               href="/about"
               className="btn-outline border border-abc-gray-mid text-abc-gray-text px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline inline-block"
             >
-              Our Story
+              {cn ? "我们的故事" : "Our Story"}
             </Link>
           </div>
         </div>
@@ -76,26 +87,28 @@ export default function Home() {
         >
           {Array(8)
             .fill(
-              "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "
+              cn
+                ? "奇奇怪怪，偏偏好用。★ #非爬不可 ★ "
+                : "ODDLY USEFUL. ALWAYS FUN-CTIONAL. ★ #HOPELESSLYOBSESSED ★ "
             )
             .join("")}
         </div>
       </div>
 
-      {/* ═══ PRODUCTS — vertical cards ═══ */}
+      {/* ═══ PRODUCTS ═══ */}
       <section className="max-w-[1200px] mx-auto px-6 py-24">
         <div className="mb-16 flex justify-between items-end flex-wrap gap-4">
           <h2 className="text-[clamp(32px,6vw,72px)] font-black uppercase tracking-tight leading-none">
             <span className="text-abc-red font-mono text-xs tracking-[0.2em] block mb-2">
-              //// NEW DROP
+              //// {cn ? "新品上架" : "NEW DROP"}
             </span>
-            The Collection
+            {cn ? "本季系列" : "The Collection"}
           </h2>
           <Link
             href="/products"
             className="nav-link font-mono text-[11px] tracking-[0.2em] uppercase text-abc-gray-subtle no-underline"
           >
-            View All →
+            {cn ? "查看全部 →" : "View All →"}
           </Link>
         </div>
 
@@ -104,17 +117,17 @@ export default function Home() {
             href="/products/chalkemon"
             imageSrc="/images/chalkemon-card.png"
             label="CHALKEMON™"
-            sub="粉袋精灵 · Chalk Bag"
+            sub={cn ? "粉袋精灵" : "Chalk Bag"}
             price="HK$380"
-            tag="BESTSELLER"
+            tag={cn ? "热销" : "BESTSELLER"}
           />
           <ProductCard
             href="/products/tshirt"
             imageSrc="/images/tshirt-card.png"
             label="ABC TEE"
-            sub="AnythingButClimbing · T-Shirt"
+            sub={cn ? "短袖" : "T-Shirt"}
             price="HK$280"
-            tag="LIMITED"
+            tag={cn ? "限量" : "LIMITED"}
           />
         </div>
       </section>
@@ -132,18 +145,28 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/50" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
             <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-red mb-6">
-              //// Manifesto
+              //// {cn ? "品牌宣言" : "Manifesto"}
             </div>
             <blockquote className="text-[clamp(20px,4vw,42px)] font-bold max-w-[800px] leading-snug mb-8">
-              Oddly useful.
-              <br />
-              <span className="text-abc-red">Always FUNctional.</span>
+              {cn ? (
+                <>
+                  奇奇怪怪，
+                  <br />
+                  <span className="text-abc-red">偏偏好用。</span>
+                </>
+              ) : (
+                <>
+                  Oddly useful.
+                  <br />
+                  <span className="text-abc-red">Always FUNctional.</span>
+                </>
+              )}
             </blockquote>
             <Link
               href="/about"
               className="nav-link font-mono text-[11px] tracking-[0.2em] uppercase text-abc-gray-subtle no-underline border-b border-abc-gray-mid pb-0.5"
             >
-              Read Our Story →
+              {cn ? "了解我们 →" : "Read Our Story →"}
             </Link>
           </div>
         </div>
@@ -171,7 +194,6 @@ function ProductCard({
   return (
     <Link href={href} className="no-underline block">
       <div className="product-card bg-abc-gray-card border border-abc-gray-line flex flex-col cursor-pointer overflow-hidden">
-        {/* Image area */}
         <div className="relative aspect-[4/5] bg-abc-black overflow-hidden">
           <div className="absolute top-4 right-4 bg-abc-red text-white font-mono text-[9px] tracking-[0.2em] px-2 py-1 uppercase z-10">
             {tag}
@@ -185,7 +207,6 @@ function ProductCard({
           />
         </div>
 
-        {/* Text area */}
         <div className="p-6 md:p-8">
           <div className="font-mono text-[10px] tracking-[0.2em] text-[#444] uppercase mb-1">
             {sub}
