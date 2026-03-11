@@ -7,9 +7,9 @@ import { useCart } from "@/lib/cart";
 const SIZES = ["S", "M", "L", "XL"];
 
 const COLORS = [
-  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444" },
-  { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a" },
-  { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a" },
+  { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-burgundy.jpg" },
+  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-black.jpg" },
+  { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-pdp.png" },
 ];
 
 export default function TshirtPage() {
@@ -44,7 +44,7 @@ export default function TshirtPage() {
 
           <div className="relative aspect-square bg-abc-gray-card border border-abc-gray-line overflow-hidden">
             <Image
-              src="/images/tshirt-pdp.png"
+              src={color.img}
               alt="ABC T-Shirt"
               fill
               className="object-cover"
