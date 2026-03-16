@@ -119,7 +119,7 @@ export default function Home() {
           />
           <ProductCard
             href="/products/tshirt"
-            imageSrc="/images/tshirt-card.png"
+            imageSrc="/images/tshirt-burgundy.jpg"
             label="ABC TEE"
             sub={cn ? "短袖" : "T-Shirt"}
             price="HK$280"
