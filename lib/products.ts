@@ -17,7 +17,7 @@ export const CURRENCY = "hkd";
 // Price resolver keyed by cart item id.
 // Cart ids seen in the app:
 //   chalkemon            -> Chalkemon (all colorways add to cart with id "chalkemon")
-//   tshirt-{colorId}     -> ABC Tee (burgundy / black / navy)
+//   tshirt-{colorId}     -> ABC Tee (10 colorways, all HK$280)
 //
 // Chalkemon colorways differ in price (380 / 420 / 420) but all share the id
 // "chalkemon" in the cart. Since the cart does not carry the colorway id, we
@@ -25,15 +25,28 @@ export const CURRENCY = "hkd";
 // price tampering we resolve Chalkemon to its LISTED price range and validate
 // the client price is one of the allowed values, rather than blindly trusting.
 
+// ABC Tee colorways. MUST stay in sync with the COLORS array in
+// app/products/tshirt/page.tsx — the cart id is `tshirt-${color.id}`.
+// If you add a colorway on the product page, add its id here or checkout
+// will reject it as an unknown product (400).
+const TSHIRT_COLOR_IDS = [
+  "black", "burgundy", "navy", "armygreen", "blue",
+  "lightblue", "gray", "lightgray", "apricot", "pink",
+];
+const TSHIRT_PRICE = 280;
+
 type PriceRule =
   | { kind: "fixed"; price: number }
   | { kind: "allowed"; prices: number[] };
 
 const PRICE_RULES: Record<string, PriceRule> = {
   chalkemon: { kind: "allowed", prices: [380, 420] },
-  "tshirt-burgundy": { kind: "fixed", price: 280 },
-  "tshirt-black": { kind: "fixed", price: 280 },
-  "tshirt-navy": { kind: "fixed", price: 280 },
+  ...Object.fromEntries(
+    TSHIRT_COLOR_IDS.map((c) => [
+      `tshirt-${c}`,
+      { kind: "fixed", price: TSHIRT_PRICE } as PriceRule,
+    ])
+  ),
 };
 
 /**

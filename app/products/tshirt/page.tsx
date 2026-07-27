@@ -8,7 +8,7 @@ import { useLang } from "@/lib/lang";
 const SIZES = ["S", "M", "L", "XL"];
 
 const COLORS = [
-  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-spec-black.png" },
+  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true },
   { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-spec-burgundy.png" },
   { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
   { id: "armygreen", name: "Army Green", cn: "军绿", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
@@ -58,12 +58,16 @@ export default function TshirtPage() {
             <span className="text-abc-gray-subtle">{lang === "cn" ? "短袖" : "T-Shirt"}</span>
           </div>
 
-          <div className="relative aspect-square bg-white border border-abc-gray-line overflow-hidden">
+          <div
+            className={`relative aspect-square border border-abc-gray-line overflow-hidden ${
+              "model" in color && color.model ? "bg-abc-black" : "bg-white"
+            }`}
+          >
             <Image
               src={color.img}
               alt={`ABC T-Shirt — ${color.name}`}
               fill
-              className="object-contain"
+              className={"model" in color && color.model ? "object-cover" : "object-contain"}
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
