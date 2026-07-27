@@ -124,6 +124,7 @@ export default function Home() {
             sub={cn ? "短袖" : "T-Shirt"}
             price="HK$280"
             tag={cn ? "限量" : "LIMITED"}
+            imgPosition="center 72%"
           />
         </div>
       </section>
@@ -169,6 +170,7 @@ function ProductCard({
   sub,
   price,
   tag,
+  imgPosition = "center",
 }: {
   href: string;
   imageSrc: string;
@@ -176,6 +178,7 @@ function ProductCard({
   sub: string;
   price: string;
   tag: string;
+  imgPosition?: string;
 }) {
   return (
     <Link href={href} className="no-underline block">
@@ -189,6 +192,7 @@ function ProductCard({
             alt={label}
             fill
             className="object-cover"
+            style={{ objectPosition: imgPosition }}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
