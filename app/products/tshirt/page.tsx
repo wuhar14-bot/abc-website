@@ -8,16 +8,23 @@ import { useLang } from "@/lib/lang";
 const SIZES = ["S", "M", "L", "XL"];
 
 const COLORS = [
-  { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-burgundy.jpg" },
-  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-black.jpg" },
-  { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-pdp.png" },
+  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-spec-black.png" },
+  { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-spec-burgundy.png" },
+  { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
+  { id: "armygreen", name: "Army Green", cn: "军绿", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
+  { id: "blue", name: "Royal Blue", cn: "蓝色", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt-spec-blue.png" },
+  { id: "lightblue", name: "Sky Blue", cn: "浅蓝", hex: "#a9c9e8", border: "#c0d8f0", img: "/images/tshirt-spec-lightblue.png" },
+  { id: "gray", name: "Heather Gray", cn: "灰色", hex: "#8a8a8a", border: "#a0a0a0", img: "/images/tshirt-spec-gray.png" },
+  { id: "lightgray", name: "Light Gray", cn: "浅灰", hex: "#d0d0d0", border: "#e0e0e0", img: "/images/tshirt-spec-lightgray.png" },
+  { id: "apricot", name: "Apricot", cn: "杏色", hex: "#ede4cf", border: "#f0e8d8", img: "/images/tshirt-spec-apricot.png" },
+  { id: "pink", name: "Pink", cn: "粉红", hex: "#f0c4cc", border: "#f5d5db", img: "/images/tshirt-spec-pink.png" },
 ];
 
 const FEATURES = [
   { en: "Oversized streetwear fit", cn: "宽松街头廓形" },
-  { en: "Washed-out dark gray cotton", cn: "水洗做旧棉料" },
+  { en: "Cotton + Sorona blend, soft & wrinkle-resistant", cn: "棉 + Sorona 混纺，柔软抗皱" },
   { en: "Hand-lettered back print", cn: "手写体背印" },
-  { en: "ABC logo on chest", cn: "胸前ABC logo" },
+  { en: "10 colorways available", cn: "10 种配色可选" },
 ];
 
 export default function TshirtPage() {
@@ -51,12 +58,12 @@ export default function TshirtPage() {
             <span className="text-abc-gray-subtle">{lang === "cn" ? "短袖" : "T-Shirt"}</span>
           </div>
 
-          <div className="relative aspect-square bg-abc-gray-card border border-abc-gray-line overflow-hidden">
+          <div className="relative aspect-square bg-white border border-abc-gray-line overflow-hidden">
             <Image
               src={color.img}
-              alt="ABC T-Shirt"
+              alt={`ABC T-Shirt — ${color.name}`}
               fill
-              className="object-cover"
+              className="object-contain"
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -92,7 +99,7 @@ export default function TshirtPage() {
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-abc-gray-subtle mb-3">
               {lang === "cn" ? `颜色 — ${color.cn}` : `Color — ${color.name}`}
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-wrap">
               {COLORS.map((c) => (
                 <button
                   key={c.id}
