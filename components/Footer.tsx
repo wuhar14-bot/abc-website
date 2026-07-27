@@ -66,16 +66,6 @@ export default function Footer() {
                 Instagram
               </a>
             </div>
-            <div className="mb-2">
-              <a
-                href="https://www.xiaohongshu.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link text-abc-gray-text no-underline"
-              >
-                小红书
-              </a>
-            </div>
           </div>
         </div>
       </div>

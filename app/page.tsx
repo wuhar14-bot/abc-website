@@ -2,12 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeroBrandImage from "@/components/HeroBrandImage";
-import { useLang } from "@/lib/lang";
 
 export default function Home() {
-  const { lang } = useLang();
-  const cn = lang === "cn";
-
   return (
     <div className="pt-[60px]">
       {/* ═══ HERO ═══ */}
@@ -35,7 +31,7 @@ export default function Home() {
             className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-red mb-8 opacity-0"
             style={{ animation: "fadeIn 0.6s ease 2.7s forwards" }}
           >
-            {cn ? "— 新品上架 —" : "— New Drop Available —"}
+            — New Drop Available —
           </div>
 
           <HeroBrandImage />
@@ -44,19 +40,11 @@ export default function Home() {
             className="font-mono text-[13px] tracking-[0.2em] uppercase text-abc-gray-subtle max-w-[420px] mx-auto mb-12 leading-relaxed opacity-0"
             style={{ animation: "fadeIn 0.6s ease 2.7s forwards" }}
           >
-            {cn ? (
-              <>
-                Oddly useful. Always FUNctional.
-                <br />
-                认识 Chalkemon 粉袋精灵。
-              </>
-            ) : (
-              <>
-                Oddly useful. Always FUNctional.
-                <br />
-                Meet Chalkemon — your chalk bag companion.
-              </>
-            )}
+            <>
+              Oddly useful. Always FUNctional.
+              <br />
+              Meet Chalkemon — your chalk bag companion.
+            </>
           </p>
 
           <div
@@ -67,13 +55,13 @@ export default function Home() {
               href="/products/chalkemon"
               className="btn-red bg-abc-red text-white px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline font-semibold inline-block"
             >
-              {cn ? "入手 Chalkemon" : "Shop Chalkemon"}
+              Shop Chalkemon
             </Link>
             <Link
               href="/about"
               className="btn-outline border border-abc-gray-mid text-abc-gray-text px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline inline-block"
             >
-              {cn ? "我们的故事" : "Our Story"}
+              Our Story
             </Link>
           </div>
         </div>
@@ -96,15 +84,15 @@ export default function Home() {
         <div className="mb-16 flex justify-between items-end flex-wrap gap-4">
           <h2 className="text-[clamp(32px,6vw,72px)] font-black uppercase tracking-tight leading-none">
             <span className="text-abc-red font-mono text-xs tracking-[0.2em] block mb-2">
-              //// {cn ? "新品上架" : "NEW DROP"}
+              //// NEW DROP
             </span>
-            {cn ? "本季系列" : "The Collection"}
+            The Collection
           </h2>
           <Link
             href="/products"
             className="nav-link font-mono text-[11px] tracking-[0.2em] uppercase text-abc-gray-subtle no-underline"
           >
-            {cn ? "查看全部 →" : "View All →"}
+            View All →
           </Link>
         </div>
 
@@ -113,18 +101,18 @@ export default function Home() {
             href="/products/chalkemon"
             imageSrc="/images/chalkemon-card.png"
             label="CHALKEMON™"
-            sub={cn ? "粉袋精灵" : "Chalk Bag"}
+            sub="Chalk Bag"
             price="HK$380"
-            tag={cn ? "热销" : "BESTSELLER"}
+            tag="BESTSELLER"
           />
           <ProductCard
             href="/products/tshirt"
-            imageSrc="/images/tshirt-model-burgundy-home.jpg"
+            imageSrc="/images/tshirt-burgundy-2.jpg"
             label="ABC TEE"
-            sub={cn ? "短袖" : "T-Shirt"}
+            sub="T-Shirt"
             price="HK$280"
-            tag={cn ? "限量" : "LIMITED"}
-            imgPosition="center 72%"
+            tag="LIMITED"
+            imgPosition="center 25%"
           />
         </div>
       </section>
@@ -142,7 +130,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/50" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
             <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-red mb-6">
-              //// {cn ? "品牌宣言" : "Manifesto"}
+              //// Manifesto
             </div>
             <blockquote className="text-[clamp(20px,4vw,42px)] font-bold max-w-[800px] leading-snug mb-8">
               Oddly useful.
@@ -153,7 +141,7 @@ export default function Home() {
               href="/about"
               className="nav-link font-mono text-[11px] tracking-[0.2em] uppercase text-abc-gray-subtle no-underline border-b border-abc-gray-mid pb-0.5"
             >
-              {cn ? "了解我们 →" : "Read Our Story →"}
+              Read Our Story →
             </Link>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
-import { useLang } from "@/lib/lang";
 
 const PRODUCT_IMAGES: Record<string, string> = {
     chalkemon: "/images/chalkemon-card.png",
@@ -17,7 +16,6 @@ function imageFor(id: string) {
 
 export default function CheckoutPage() {
     const { items, total, count } = useCart();
-    const { lang } = useLang();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -59,10 +57,10 @@ export default function CheckoutPage() {
             {/* Header */}
             <div className="mb-12">
                 <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-red mb-3">
-                    //// {lang === "cn" ? "结账" : "Checkout"}
+                    //// Checkout
                 </div>
                 <h1 className="text-[clamp(32px,5vw,56px)] font-black uppercase tracking-tight leading-none">
-                    {lang === "cn" ? "确认订单" : "Review Order"}
+                    Review Order
                 </h1>
             </div>
 
@@ -102,9 +100,7 @@ export default function CheckoutPage() {
 
                     {/* Trust / info note */}
                     <div className="mt-8 font-mono text-[10px] tracking-[0.12em] text-abc-gray-mid uppercase leading-relaxed">
-                        {lang === "cn"
-                            ? "收货地址与运费将在下一步（Stripe 安全收银台）填写。支付由 Stripe 处理，我们不接触你的银行卡信息。"
-                            : "Shipping address & fees are collected on the next step (Stripe secure checkout). Payments are handled by Stripe — we never see your card details."}
+                        Shipping address &amp; fees are collected on the next step (Stripe secure checkout). Payments are handled by Stripe — we never see your card details.
                     </div>
 
                     {error && (
@@ -119,16 +115,14 @@ export default function CheckoutPage() {
                             href="/cart"
                             className="btn-outline border border-abc-gray-mid text-abc-gray-text px-8 py-4 font-mono text-xs tracking-[0.2em] uppercase cursor-pointer bg-transparent no-underline"
                         >
-                            ← {lang === "cn" ? "购物车" : "Cart"}
+                            ← Cart
                         </Link>
                         <button
                             onClick={handlePay}
                             disabled={loading}
                             className="btn-red flex-1 py-4 bg-abc-red text-white border-none font-mono text-[13px] tracking-[0.25em] uppercase cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {loading
-                                ? lang === "cn" ? "跳转中…" : "Redirecting…"
-                                : lang === "cn" ? "前往支付 →" : "Pay with Stripe →"}
+                            {loading ? "Redirecting…" : "Pay with Stripe →"}
                         </button>
                     </div>
                 </div>
@@ -136,26 +130,26 @@ export default function CheckoutPage() {
                 {/* RIGHT — Summary */}
                 <div className="bg-abc-gray-card border-l border-abc-gray-line p-6 md:p-8 md:sticky md:top-[84px]">
                     <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-abc-gray-subtle mb-6">
-                        {lang === "cn" ? "订单摘要" : "Order Summary"}
+                        Order Summary
                     </div>
                     <div className="flex justify-between items-center mb-3">
                         <span className="font-mono text-xs tracking-[0.15em] uppercase text-abc-gray-subtle">
-                            {lang === "cn" ? "件数" : "Items"}
+                            Items
                         </span>
                         <span className="font-mono text-sm text-abc-gray-text">{count()}</span>
                     </div>
                     <div className="flex justify-between items-center pb-4 mb-4 border-b border-abc-gray-line">
                         <span className="font-mono text-xs tracking-[0.15em] uppercase text-abc-gray-subtle">
-                            {lang === "cn" ? "小计" : "Subtotal"}
+                            Subtotal
                         </span>
                         <span className="font-mono text-sm text-abc-gray-text">HK${total()}</span>
                     </div>
                     <div className="font-mono text-[10px] tracking-[0.12em] text-abc-gray-mid uppercase mb-4">
-                        {lang === "cn" ? "运费下一步计算" : "Shipping calculated next step"}
+                        Shipping calculated next step
                     </div>
                     <div className="flex justify-between items-center pt-2">
                         <span className="font-mono text-xs tracking-[0.2em] uppercase text-abc-gray-subtle">
-                            {lang === "cn" ? "合计" : "Total"}
+                            Total
                         </span>
                         <span className="font-mono text-lg text-abc-red font-bold">
                             HK${total()}

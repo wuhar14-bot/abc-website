@@ -3,28 +3,27 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
-import { useLang } from "@/lib/lang";
 
 const SIZES = ["S", "M", "L", "XL"];
 
 const COLORS = [
-  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true, imgPosition: "center 26%" },
-  { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-spec-burgundy.png" },
-  { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
-  { id: "armygreen", name: "Army Green", cn: "军绿", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
-  { id: "blue", name: "Royal Blue", cn: "蓝色", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt-spec-blue.png" },
-  { id: "lightblue", name: "Sky Blue", cn: "浅蓝", hex: "#a9c9e8", border: "#c0d8f0", img: "/images/tshirt-spec-lightblue.png" },
-  { id: "gray", name: "Heather Gray", cn: "灰色", hex: "#8a8a8a", border: "#a0a0a0", img: "/images/tshirt-spec-gray.png" },
-  { id: "lightgray", name: "Light Gray", cn: "浅灰", hex: "#d0d0d0", border: "#e0e0e0", img: "/images/tshirt-spec-lightgray.png" },
-  { id: "apricot", name: "Apricot", cn: "杏色", hex: "#ede4cf", border: "#f0e8d8", img: "/images/tshirt-spec-apricot.png" },
-  { id: "pink", name: "Pink", cn: "粉红", hex: "#f0c4cc", border: "#f5d5db", img: "/images/tshirt-spec-pink.png" },
+  { id: "black", name: "Black", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true, imgPosition: "center 26%" },
+  { id: "burgundy", name: "Burgundy", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-spec-burgundy.png" },
+  { id: "navy", name: "Navy", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
+  { id: "armygreen", name: "Army Green", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
+  { id: "blue", name: "Royal Blue", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt-spec-blue.png" },
+  { id: "lightblue", name: "Sky Blue", hex: "#a9c9e8", border: "#c0d8f0", img: "/images/tshirt-spec-lightblue.png" },
+  { id: "gray", name: "Heather Gray", hex: "#8a8a8a", border: "#a0a0a0", img: "/images/tshirt-spec-gray.png" },
+  { id: "lightgray", name: "Light Gray", hex: "#d0d0d0", border: "#e0e0e0", img: "/images/tshirt-spec-lightgray.png" },
+  { id: "apricot", name: "Apricot", hex: "#ede4cf", border: "#f0e8d8", img: "/images/tshirt-spec-apricot.png" },
+  { id: "pink", name: "Pink", hex: "#f0c4cc", border: "#f5d5db", img: "/images/tshirt-spec-pink.png" },
 ];
 
 const FEATURES = [
-  { en: "Oversized streetwear fit", cn: "宽松街头廓形" },
-  { en: "Cotton + Sorona blend, soft & wrinkle-resistant", cn: "棉 + Sorona 混纺，柔软抗皱" },
-  { en: "Hand-lettered back print", cn: "手写体背印" },
-  { en: "10 colorways available", cn: "10 种配色可选" },
+  "Oversized streetwear fit",
+  "Cotton + Sorona blend, soft & wrinkle-resistant",
+  "Hand-lettered back print",
+  "10 colorways available",
 ];
 
 export default function TshirtPage() {
@@ -32,13 +31,12 @@ export default function TshirtPage() {
   const [color, setColor] = useState(COLORS[0]);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
-  const { lang } = useLang();
 
   const handleAddToCart = () => {
     addItem({
       id: `tshirt-${color.id}`,
       name: "ABC TEE",
-      variant: `${lang === "cn" ? color.cn : color.name} / ${size}`,
+      variant: `${color.name} / ${size}`,
       price: 280,
     });
     setAdded(true);
@@ -52,10 +50,10 @@ export default function TshirtPage() {
         <div>
           <div className="font-mono text-[10px] tracking-[0.15em] uppercase mb-6 flex gap-2">
             <Link href="/products" className="nav-link text-abc-gray-mid no-underline">
-              {lang === "cn" ? "商店" : "Shop"}
+              Shop
             </Link>
             <span className="text-abc-gray-line">/</span>
-            <span className="text-abc-gray-subtle">{lang === "cn" ? "短袖" : "T-Shirt"}</span>
+            <span className="text-abc-gray-subtle">T-Shirt</span>
           </div>
 
           <div
@@ -78,7 +76,7 @@ export default function TshirtPage() {
         {/* Right: info */}
         <div>
           <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-abc-red mb-4">
-            //// T-Shirt · 短袖
+            //// T-Shirt
           </div>
 
           <h1 className="text-[clamp(40px,6vw,72px)] font-black uppercase tracking-tight leading-none mb-2">
@@ -94,22 +92,20 @@ export default function TshirtPage() {
           </div>
 
           <div className="text-sm text-abc-gray-text leading-relaxed max-w-[480px] mb-8">
-            {lang === "cn"
-              ? "宽松街头短袖，背面手写体「AnythingButClimbing」印花，胸前ABC logo。"
-              : <>Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back. ABC logo on the front chest.</>}
+            Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back. ABC logo on the front chest.
           </div>
 
           {/* Color selector */}
           <div className="mb-6">
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-abc-gray-subtle mb-3">
-              {lang === "cn" ? `颜色 — ${color.cn}` : `Color — ${color.name}`}
+              {`Color — ${color.name}`}
             </div>
             <div className="flex gap-3 flex-wrap">
               {COLORS.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => setColor(c)}
-                  title={lang === "cn" ? c.cn : c.name}
+                  title={c.name}
                   className="w-8 h-8 rounded-full cursor-pointer outline-none"
                   style={{
                     background: c.hex,
@@ -125,7 +121,7 @@ export default function TshirtPage() {
           {/* Size selector */}
           <div className="mb-8">
             <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-abc-gray-subtle mb-3">
-              {lang === "cn" ? `尺码 — ${size}` : `Size — ${size}`}
+              {`Size — ${size}`}
             </div>
             <div className="flex gap-2 flex-wrap">
               {SIZES.map((s) => (
@@ -150,11 +146,11 @@ export default function TshirtPage() {
           <div className="mb-10">
             {FEATURES.map((f) => (
               <div
-                key={f.en}
+                key={f}
                 className="flex gap-3 pb-2.5 mb-2.5 border-b border-abc-gray-line font-mono text-xs tracking-[0.1em] text-[#888] uppercase"
               >
                 <span className="text-abc-red">+</span>
-                {lang === "cn" ? f.cn : f.en}
+                {f}
               </div>
             ))}
           </div>
@@ -168,13 +164,11 @@ export default function TshirtPage() {
               transition: "background 150ms ease",
             }}
           >
-            {added
-              ? (lang === "cn" ? "✓ 已加入购物车" : "✓ Added to Cart")
-              : (lang === "cn" ? "加入购物车 — HK$280" : "Add to Cart — HK$280")}
+            {added ? "✓ Added to Cart" : "Add to Cart — HK$280"}
           </button>
 
           <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mt-4 text-center">
-            {lang === "cn" ? "香港免运费 · 国际配送 HK$120起" : "Free shipping HK · Worldwide from HK$120"}
+            Free shipping HK · Worldwide from HK$120
           </div>
         </div>
       </section>

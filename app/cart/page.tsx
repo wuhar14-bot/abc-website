@@ -1,6 +1,5 @@
 "use client";
 import { useCart } from "@/lib/cart";
-import { useLang } from "@/lib/lang";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -11,22 +10,21 @@ const PRODUCT_IMAGES: Record<string, string> = {
 
 export default function CartPage() {
   const { items, removeItem, updateQty, total, count } = useCart();
-  const { lang } = useLang();
 
   if (items.length === 0) {
     return (
       <div className="pt-[60px] min-h-screen flex flex-col items-center justify-center text-center gap-6">
         <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-gray-mid">
-          //// {lang === "cn" ? "购物车" : "Your Cart"}
+          //// Your Cart
         </div>
         <h1 className="text-5xl font-black uppercase tracking-tight text-[#222]">
-          {lang === "cn" ? "空空如也" : "Empty"}
+          Empty
         </h1>
         <Link
           href="/products"
           className="btn-red bg-abc-red text-white px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline font-semibold"
         >
-          {lang === "cn" ? "去逛逛" : "Shop Now"}
+          Shop Now
         </Link>
       </div>
     );
@@ -36,10 +34,10 @@ export default function CartPage() {
     <div className="pt-[60px] max-w-[900px] mx-auto px-6 py-24">
       <div className="mb-16">
         <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-red mb-3">
-          //// {lang === "cn" ? "购物车" : "Your Cart"}
+          //// Your Cart
         </div>
         <h1 className="text-[clamp(40px,7vw,80px)] font-black uppercase tracking-tight leading-none">
-          {count()} {lang === "cn" ? "件商品" : count() === 1 ? "Item" : "Items"}
+          {count()} {count() === 1 ? "Item" : "Items"}
         </h1>
       </div>
 
@@ -94,7 +92,7 @@ export default function CartPage() {
               onClick={() => removeItem(item.id, item.variant)}
               className="btn-text bg-transparent border-none text-abc-gray-mid cursor-pointer font-mono text-[11px] tracking-[0.1em] uppercase"
             >
-              {lang === "cn" ? "删除" : "Remove"}
+              Remove
             </button>
           </div>
         ))}
@@ -103,20 +101,20 @@ export default function CartPage() {
       <div className="bg-abc-gray-card border border-abc-gray-line p-8">
         <div className="flex justify-between items-center mb-6">
           <span className="font-mono text-xs tracking-[0.2em] uppercase text-abc-gray-subtle">
-            {lang === "cn" ? "小计" : "Subtotal"}
+            Subtotal
           </span>
           <span className="font-mono text-xl text-abc-red font-bold">
             HK${total()}
           </span>
         </div>
         <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mb-6">
-          {lang === "cn" ? "运费在结账时计算" : "Shipping calculated at checkout"}
+          Shipping calculated at checkout
         </div>
         <Link
           href="/checkout"
           className="btn-red block w-full py-5 bg-abc-red text-white border-none font-mono text-[13px] tracking-[0.25em] uppercase cursor-pointer no-underline font-semibold text-center"
         >
-          {lang === "cn" ? "前往结账 →" : "Proceed to Checkout →"}
+          Proceed to Checkout →
         </Link>
       </div>
     </div>

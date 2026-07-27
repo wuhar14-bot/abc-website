@@ -3,11 +3,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/lib/cart";
-import { useLang } from "@/lib/lang";
 
 export default function Navbar() {
   const cartCount = useCart((s) => s.count());
-  const { lang, setLang } = useLang();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // Body scroll lock
@@ -40,24 +38,6 @@ export default function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-4">
-          {/* Lang toggle */}
-          <div className="flex font-mono text-[10px] tracking-[0.15em] border border-abc-gray-mid">
-            <button
-              onClick={() => setLang("cn")}
-              className="px-2.5 py-1 cursor-pointer border-none"
-              style={{ background: lang === "cn" ? "#e63232" : "transparent", color: lang === "cn" ? "#fff" : "#888" }}
-            >
-              CN
-            </button>
-            <button
-              onClick={() => setLang("en")}
-              className="px-2.5 py-1 cursor-pointer border-none border-l border-abc-gray-mid"
-              style={{ background: lang === "en" ? "#e63232" : "transparent", color: lang === "en" ? "#fff" : "#888" }}
-            >
-              EN
-            </button>
-          </div>
-
           {/* Cart */}
           <Link
             href="/cart"

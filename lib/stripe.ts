@@ -14,10 +14,10 @@ if (!secretKey) {
   );
 }
 
-// Dev-only: route Stripe API calls through a local proxy (e.g. 云梯 on :7897)
-// when developing behind the GFW. The Stripe SDK does NOT read HTTPS_PROXY on
-// its own, so we build an agent explicitly. In production (Vercel) no proxy env
-// var is set, so this is a no-op and Stripe connects directly.
+// Dev-only: route Stripe API calls through a local HTTP proxy when one is set
+// in the environment. The Stripe SDK does NOT read HTTPS_PROXY on its own, so
+// we build an agent explicitly. In production (Vercel) no proxy env var is set,
+// so this is a no-op and Stripe connects directly.
 const proxyUrl =
   process.env.HTTPS_PROXY ||
   process.env.https_proxy ||
