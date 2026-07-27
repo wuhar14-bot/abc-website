@@ -8,7 +8,7 @@ import { useLang } from "@/lib/lang";
 const SIZES = ["S", "M", "L", "XL"];
 
 const COLORS = [
-  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true },
+  { id: "black", name: "Black", cn: "黑色", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true, imgPosition: "center 26%" },
   { id: "burgundy", name: "Burgundy", cn: "酒红", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-spec-burgundy.png" },
   { id: "navy", name: "Navy", cn: "藏青", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
   { id: "armygreen", name: "Army Green", cn: "军绿", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
@@ -68,6 +68,7 @@ export default function TshirtPage() {
               alt={`ABC T-Shirt — ${color.name}`}
               fill
               className={"model" in color && color.model ? "object-cover" : "object-contain"}
+              style={"imgPosition" in color && color.imgPosition ? { objectPosition: color.imgPosition } : undefined}
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
