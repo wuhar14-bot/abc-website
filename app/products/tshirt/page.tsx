@@ -8,7 +8,7 @@ const SIZES = ["S", "M", "L", "XL"];
 
 const COLORS = [
   { id: "black", name: "Black", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true, imgPosition: "center 26%" },
-  { id: "burgundy", name: "Burgundy", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-spec-burgundy.png" },
+  { id: "burgundy", name: "Burgundy", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-burgundy-5_focus.jpg", model: true, imgPosition: "center" },
   { id: "navy", name: "Navy", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
   { id: "armygreen", name: "Army Green", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
   { id: "blue", name: "Royal Blue", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt-spec-blue.png" },
