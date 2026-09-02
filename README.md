@@ -23,8 +23,10 @@
 | `/products` | All products |
 | `/products/chalkemon` | Chalkemon product page |
 | `/products/tshirt` | ABC Tee product page |
+| `/products/brush` | ABC Brush product page |
 | `/cart` | Cart |
-| `/checkout` | Checkout (Stripe, todo) |
+| `/checkout` | Checkout (Stripe) |
+| `/admin/orders` | Private order desk (Stripe-backed) |
 | `/about` | Brand story |
 
 ## Tech Stack
@@ -32,8 +34,18 @@
 - Next.js 16 (App Router)
 - Tailwind CSS v4
 - Zustand (cart state)
-- Stripe (payments, todo)
-- Vercel (deployment, todo)
+- Stripe (payments and order data)
+- Vercel (deployment)
+
+## Order desk
+
+Set `ADMIN_DASHBOARD_TOKEN` in Vercel Production environment variables, then open
+`/admin/orders`. The page reads paid Checkout Sessions from Stripe and shows the
+customer, shipping address, items, amount, and payment status. It also stores
+fulfillment status, carrier, and tracking number in the Stripe Session metadata.
+
+The token is kept in the browser session only. Do not commit it or paste it into
+the repository.
 
 ## Dev Commands
 

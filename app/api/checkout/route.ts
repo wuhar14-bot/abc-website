@@ -74,6 +74,9 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: lineItems,
+      metadata: {
+        fulfillment_status: "unfulfilled",
+      },
       // Let Stripe collect the shipping address on its hosted page.
       shipping_address_collection: {
         // HK + common international markets ABC ships to. Extend as needed.
