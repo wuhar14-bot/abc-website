@@ -30,7 +30,7 @@ const COLORS = [
 const FEATURES = [
   "Oversized streetwear fit",
   "Cotton + Sorona blend, soft & wrinkle-resistant",
-  "Hand-lettered back print",
+  "AnythingButClimbing word-mark print",
   "10 colorways available",
 ];
 
