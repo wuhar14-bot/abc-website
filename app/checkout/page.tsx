@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useCart } from "@/lib/cart";
+import { useCart, useCartHydrated } from "@/lib/cart";
 
 const PRODUCT_IMAGES: Record<string, string> = {
     chalkemon: "/images/chalkemon-card.png",
     tshirt: "/images/tshirt-card.png",
+    brush: "/photos-brush/brush-01.jpg",
 };
 
 function imageFor(id: string) {
@@ -16,16 +17,19 @@ function imageFor(id: string) {
 
 export default function CheckoutPage() {
     const { items, total, count } = useCart();
+    const hydrated = useCartHydrated();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Redirect if cart is empty (client-side only)
+    // Redirect if the cart is genuinely empty — but only AFTER localStorage has
+    // been read. Redirecting before hydration throws away a real cart on any
+    // page refresh or direct visit to /checkout.
     useEffect(() => {
-        if (items.length === 0) {
+        if (hydrated && items.length === 0) {
             router.push("/products");
         }
-    }, [items.length, router]);
+    }, [hydrated, items.length, router]);
 
     const handlePay = async () => {
         setLoading(true);
@@ -47,6 +51,18 @@ export default function CheckoutPage() {
             setLoading(false);
         }
     };
+
+    // Before hydration we don't yet know whether the cart is empty, so show a
+    // placeholder instead of flashing "empty" or redirecting prematurely.
+    if (!hydrated) {
+        return (
+            <div className="pt-[60px] min-h-[60vh] flex items-center justify-center">
+                <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-gray-subtle">
+                    Loading order…
+                </div>
+            </div>
+        );
+    }
 
     if (items.length === 0) {
         return null; // Will redirect via useEffect

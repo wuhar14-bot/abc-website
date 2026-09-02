@@ -1,15 +1,29 @@
 "use client";
-import { useCart } from "@/lib/cart";
+import { useCart, useCartHydrated } from "@/lib/cart";
 import Link from "next/link";
 import Image from "next/image";
 
 const PRODUCT_IMAGES: Record<string, string> = {
   chalkemon: "/images/chalkemon-card.png",
   tshirt: "/images/tshirt-card.png",
+  brush: "/photos-brush/brush-01.jpg",
 };
 
 export default function CartPage() {
   const { items, removeItem, updateQty, total, count } = useCart();
+  const hydrated = useCartHydrated();
+
+  // Wait for localStorage before deciding the cart is empty, otherwise a real
+  // cart flashes "empty" for a frame on every page load.
+  if (!hydrated) {
+    return (
+      <div className="pt-[60px] min-h-[60vh] flex items-center justify-center">
+        <div className="font-mono text-[11px] tracking-[0.3em] uppercase text-abc-gray-subtle">
+          Loading cart…
+        </div>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

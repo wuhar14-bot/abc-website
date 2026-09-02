@@ -35,12 +35,17 @@ const TSHIRT_COLOR_IDS = [
 ];
 const TSHIRT_PRICE = 280;
 
+// Electric chalk brush. Single SKU, no variants.
+// Intro price — raise this once the trademark specimens are filed.
+const BRUSH_PRICE = 150;
+
 type PriceRule =
   | { kind: "fixed"; price: number }
   | { kind: "allowed"; prices: number[] };
 
 const PRICE_RULES: Record<string, PriceRule> = {
   chalkemon: { kind: "allowed", prices: [380, 420] },
+  brush: { kind: "fixed", price: BRUSH_PRICE },
   ...Object.fromEntries(
     TSHIRT_COLOR_IDS.map((c) => [
       `tshirt-${c}`,

@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 export type CartItem = {
   id: string;
@@ -18,42 +20,76 @@ type CartStore = {
   count: () => number;
 };
 
-export const useCart = create<CartStore>((set, get) => ({
-  items: [],
-  addItem: (item) => {
-    set((state) => {
-      const existing = state.items.find(
-        (i) => i.id === item.id && i.variant === item.variant
-      );
-      if (existing) {
-        return {
-          items: state.items.map((i) =>
-            i.id === item.id && i.variant === item.variant
-              ? { ...i, qty: i.qty + 1 }
-              : i
+export const useCart = create<CartStore>()(
+  persist(
+    (set, get) => ({
+      items: [],
+      addItem: (item) => {
+        set((state) => {
+          const existing = state.items.find(
+            (i) => i.id === item.id && i.variant === item.variant
+          );
+          if (existing) {
+            return {
+              items: state.items.map((i) =>
+                i.id === item.id && i.variant === item.variant
+                  ? { ...i, qty: i.qty + 1 }
+                  : i
+              ),
+            };
+          }
+          return { items: [...state.items, { ...item, qty: 1 }] };
+        });
+      },
+      removeItem: (id, variant) => {
+        set((state) => ({
+          items: state.items.filter(
+            (i) => !(i.id === id && i.variant === variant)
           ),
-        };
-      }
-      return { items: [...state.items, { ...item, qty: 1 }] };
-    });
-  },
-  removeItem: (id, variant) => {
-    set((state) => ({
-      items: state.items.filter((i) => !(i.id === id && i.variant === variant)),
-    }));
-  },
-  updateQty: (id, variant, qty) => {
-    if (qty <= 0) {
-      get().removeItem(id, variant);
-      return;
+        }));
+      },
+      updateQty: (id, variant, qty) => {
+        if (qty <= 0) {
+          get().removeItem(id, variant);
+          return;
+        }
+        set((state) => ({
+          items: state.items.map((i) =>
+            i.id === id && i.variant === variant ? { ...i, qty } : i
+          ),
+        }));
+      },
+      clear: () => set({ items: [] }),
+      total: () => get().items.reduce((sum, i) => sum + i.price * i.qty, 0),
+      count: () => get().items.reduce((sum, i) => sum + i.qty, 0),
+    }),
+    {
+      name: "abc-cart",
+      storage: createJSONStorage(() => localStorage),
+      // Only the items array is worth persisting — the methods are recreated.
+      partialize: (state) => ({ items: state.items }),
     }
-    set((state) => ({
-      items: state.items.map((i) =>
-        i.id === id && i.variant === variant ? { ...i, qty } : i
-      ),
-    }));
-  },
-  clear: () => set({ items: [] }),
-  total: () => get().items.reduce((sum, i) => sum + i.price * i.qty, 0),
-  count: () => get().items.reduce((sum, i) => sum + i.qty, 0),
-}));
+  )
+);
+
+/**
+ * True once zustand has finished reading localStorage.
+ *
+ * Needed because the server renders with an empty cart, then the client
+ * rehydrates. Any component that redirects on an empty cart MUST wait for
+ * this, or it will bounce the user away before their cart has loaded.
+ */
+export function useCartHydrated() {
+  const [hydrated, setHydrated] = useState(useCart.persist.hasHydrated);
+
+  useEffect(() => {
+    const unsubFinish = useCart.persist.onFinishHydration(() =>
+      setHydrated(true)
+    );
+    // Covers the case where hydration already finished before we subscribed.
+    setHydrated(useCart.persist.hasHydrated());
+    return unsubFinish;
+  }, []);
+
+  return hydrated;
+}

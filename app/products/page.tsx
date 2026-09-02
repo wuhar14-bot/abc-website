@@ -28,6 +28,14 @@ const PRODUCTS: {
     tag: "LIMITED",
     imgPosition: "center",
   },
+  {
+    href: "/products/brush",
+    imageSrc: "/photos-brush/brush-01.jpg",
+    label: "ABC BRUSH",
+    sub: "Electric Chalk Brush",
+    price: "HK$150",
+    tag: "NEW",
+  },
 ];
 
 export default function ProductsPage() {

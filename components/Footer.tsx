@@ -22,6 +22,7 @@ export default function Footer() {
             {[
               ["Chalkemon", "/products/chalkemon"],
               ["T-Shirt", "/products/tshirt"],
+              ["ABC Brush", "/products/brush"],
               ["All Products", "/products"],
             ].map(([label, href]) => (
               <div key={href} className="mb-2">

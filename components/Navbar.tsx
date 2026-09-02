@@ -2,10 +2,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "@/lib/cart";
+import { useCart, useCartHydrated } from "@/lib/cart";
 
 export default function Navbar() {
-  const cartCount = useCart((s) => s.count());
+  const rawCartCount = useCart((s) => s.count());
+  const cartHydrated = useCartHydrated();
+  // Render 0 until localStorage is read — the server has no cart, so showing
+  // the persisted count too early causes a React hydration mismatch.
+  const cartCount = cartHydrated ? rawCartCount : 0;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // Body scroll lock
