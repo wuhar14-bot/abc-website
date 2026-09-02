@@ -80,14 +80,22 @@ export const useCart = create<CartStore>()(
  * this, or it will bounce the user away before their cart has loaded.
  */
 export function useCartHydrated() {
-  const [hydrated, setHydrated] = useState(useCart.persist.hasHydrated);
+  // The client-only persist API is not guaranteed to exist while Next.js
+  // prerenders framework pages such as `/_not-found`. Keep the server render
+  // deterministic and let the client effect observe the real API.
+  const [hydrated, setHydrated] = useState(
+    () => useCart.persist?.hasHydrated?.() ?? false
+  );
 
   useEffect(() => {
-    const unsubFinish = useCart.persist.onFinishHydration(() =>
-      setHydrated(true)
-    );
+    const persistApi = useCart.persist;
+    if (!persistApi) {
+      setHydrated(true);
+      return;
+    }
+    const unsubFinish = persistApi.onFinishHydration(() => setHydrated(true));
     // Covers the case where hydration already finished before we subscribed.
-    setHydrated(useCart.persist.hasHydrated());
+    setHydrated(persistApi.hasHydrated());
     return unsubFinish;
   }, []);
 
