@@ -6,12 +6,20 @@ import { useCart } from "@/lib/cart";
 
 const SIZES = ["S", "M", "L", "XL"];
 
+const GALLERY = [
+  { src: "/images/tshirt/model-blue-01.jpg", alt: "ABC T-Shirt worn, front view", fit: "cover" },
+  { src: "/images/tshirt/model-blue-02.jpg", alt: "ABC T-Shirt worn, close-up view", fit: "cover" },
+  { src: "/images/tshirt/flat-blue-front.jpg", alt: "ABC T-Shirt laid flat, front view", fit: "contain" },
+  { src: "/images/tshirt/flat-blue-detail.jpg", alt: "ABC T-Shirt laid flat, word mark detail", fit: "contain" },
+  { src: "/images/tshirt/detail-blue-print.jpg", alt: "AnythingButClimbing word mark on ABC T-Shirt", fit: "contain" },
+];
+
 const COLORS = [
   { id: "black", name: "Black", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true, imgPosition: "center 26%" },
   { id: "burgundy", name: "Burgundy", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-burgundy-5_focus.jpg", model: true, imgPosition: "center" },
   { id: "navy", name: "Navy", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
   { id: "armygreen", name: "Army Green", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
-  { id: "blue", name: "Royal Blue", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt-spec-blue.png" },
+  { id: "blue", name: "Royal Blue", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt/model-blue-01.jpg", model: true, imgPosition: "center" },
   { id: "lightblue", name: "Sky Blue", hex: "#a9c9e8", border: "#c0d8f0", img: "/images/tshirt-spec-lightblue.png" },
   { id: "gray", name: "Heather Gray", hex: "#8a8a8a", border: "#a0a0a0", img: "/images/tshirt-spec-gray.png" },
   { id: "lightgray", name: "Light Gray", hex: "#d0d0d0", border: "#e0e0e0", img: "/images/tshirt-spec-lightgray.png" },
@@ -28,7 +36,7 @@ const FEATURES = [
 
 export default function TshirtPage() {
   const [size, setSize] = useState("M");
-  const [color, setColor] = useState(COLORS[0]);
+  const [color, setColor] = useState(COLORS.find((c) => c.id === "blue") ?? COLORS[0]);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
 
@@ -92,7 +100,7 @@ export default function TshirtPage() {
           </div>
 
           <div className="text-sm text-abc-gray-text leading-relaxed max-w-[480px] mb-8">
-            Oversized streetwear tee with the hand-lettered &quot;AnythingButClimbing&quot; print on the back. ABC logo on the front chest.
+            Oversized streetwear tee featuring the AnythingButClimbing word mark across the chest, shown here on the production Royal Blue colorway.
           </div>
 
           {/* Color selector */}
@@ -170,6 +178,20 @@ export default function TshirtPage() {
           <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mt-4 text-center">
             Free shipping HK · Worldwide from HK$120
           </div>
+        </div>
+      </section>
+
+      {/* Product photography / word-mark evidence */}
+      <section className="max-w-[1200px] mx-auto px-6 py-16 border-b border-abc-gray-line">
+        <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-abc-red mb-6">
+          //// Product Photography
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+          {GALLERY.map((image) => (
+            <div key={image.src} className="relative aspect-[4/5] bg-abc-gray-card border border-abc-gray-line overflow-hidden">
+              <Image src={image.src} alt={image.alt} fill className={image.fit === "contain" ? "object-contain bg-white" : "object-cover"} sizes="(max-width: 768px) 50vw, 20vw" />
+            </div>
+          ))}
         </div>
       </section>
     </div>

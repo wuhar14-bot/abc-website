@@ -107,7 +107,7 @@ export default function Home() {
           />
           <ProductCard
             href="/products/tshirt"
-            imageSrc="/images/tshirt-model-burgundy-home.jpg"
+            imageSrc="/images/tshirt/model-blue-01.jpg"
             label="ABC TEE"
             sub="T-Shirt"
             price="HK$280"

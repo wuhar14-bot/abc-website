@@ -7,7 +7,7 @@ import { useCart, useCartHydrated } from "@/lib/cart";
 
 const PRODUCT_IMAGES: Record<string, string> = {
     chalkemon: "/images/chalkemon-card.png",
-    tshirt: "/images/tshirt-card.png",
+    tshirt: "/images/tshirt/model-blue-01.jpg",
     brush: "/photos-brush/brush-01.jpg",
 };
 

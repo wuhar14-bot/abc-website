@@ -40,6 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Keep supplied full-resolution trademark source photos local; deploy the
+# compressed JPG derivatives in public/images/tshirt/ instead.
+/public/images/tshirt/微信图片_*.png
+/_archive/tshirt-check*.png
+
 # large asset folders (raw photos / ref images — not needed for deployment)
 /public/photos/
 /public/ref/
