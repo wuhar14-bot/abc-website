@@ -9,6 +9,9 @@ const SIZES = ["S", "M", "L", "XL"];
 const GALLERY = [
   { src: "/images/tshirt/model-blue-01.jpg", alt: "ABC T-Shirt worn, front view", fit: "cover" },
   { src: "/images/tshirt/model-blue-02.jpg", alt: "ABC T-Shirt worn, close-up view", fit: "cover" },
+  { src: "/images/tshirt/flat-blue-front.jpg", alt: "ABC T-Shirt laid flat, front view", fit: "contain" },
+  { src: "/images/tshirt/flat-blue-detail.jpg", alt: "ABC T-Shirt laid flat, word mark detail", fit: "contain" },
+  { src: "/images/tshirt/detail-blue-print.jpg", alt: "AnythingButClimbing word mark on ABC T-Shirt", fit: "contain" },
 ];
 
 const COLORS = [
