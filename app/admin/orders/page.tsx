@@ -49,6 +49,7 @@ export default function AdminOrdersPage() {
   const [statusDraft, setStatusDraft] = useState<Record<string, string>>({});
   const [trackingDraft, setTrackingDraft] = useState<Record<string, string>>({});
   const [carrierDraft, setCarrierDraft] = useState<Record<string, string>>({});
+  const [emailing, setEmailing] = useState<string | null>(null);
 
   const loadOrders = async (authToken: string) => {
     setLoading(true);
@@ -118,6 +119,15 @@ export default function AdminOrdersPage() {
     } finally {
       setSaving(null);
     }
+  };
+
+  const resendEmail = async (order: Order) => {
+    setEmailing(order.id); setError(null);
+    try {
+      const res = await fetch("/api/admin/orders/email", { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ sessionId: order.id }) });
+      const data = await res.json(); if (!res.ok) throw new Error(data.error || "Could not send order email");
+    } catch (err) { setError(err instanceof Error ? err.message : "Could not send order email"); }
+    finally { setEmailing(null); }
   };
 
   if (!token) {
@@ -199,7 +209,7 @@ export default function AdminOrdersPage() {
                         <select value={statusDraft[order.id] ?? order.fulfillmentStatus} onChange={(event) => setStatusDraft((current) => ({ ...current, [order.id]: event.target.value }))} className="bg-abc-black border border-abc-gray-mid px-3 py-3 text-abc-white font-mono text-xs uppercase"><option value="unfulfilled">Unfulfilled</option><option value="processing">Processing</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled</option></select>
                         <input value={carrierDraft[order.id] ?? ""} onChange={(event) => setCarrierDraft((current) => ({ ...current, [order.id]: event.target.value }))} placeholder="Carrier" className="bg-abc-black border border-abc-gray-mid px-3 py-3 text-abc-white font-mono text-xs" />
                       </div>
-                      <div className="flex gap-3"><input value={trackingDraft[order.id] ?? ""} onChange={(event) => setTrackingDraft((current) => ({ ...current, [order.id]: event.target.value }))} placeholder="Tracking number" className="flex-1 bg-abc-black border border-abc-gray-mid px-3 py-3 text-abc-white font-mono text-xs" /><button onClick={() => saveOrder(order)} disabled={saving === order.id} className="btn-red px-5 py-3 bg-abc-red text-white border-none font-mono text-[10px] tracking-[0.15em] uppercase font-semibold">{saving === order.id ? "Saving…" : "Save"}</button></div>
+                      <div className="flex gap-3 flex-wrap"><input value={trackingDraft[order.id] ?? ""} onChange={(event) => setTrackingDraft((current) => ({ ...current, [order.id]: event.target.value }))} placeholder="Tracking number" className="flex-1 min-w-[180px] bg-abc-black border border-abc-gray-mid px-3 py-3 text-abc-white font-mono text-xs" /><button onClick={() => saveOrder(order)} disabled={saving === order.id} className="btn-red px-5 py-3 bg-abc-red text-white border-none font-mono text-[10px] tracking-[0.15em] uppercase font-semibold">{saving === order.id ? "Saving…" : "Save"}</button><button onClick={() => resendEmail(order)} disabled={emailing === order.id} className="btn-outline border border-abc-gray-mid text-abc-gray-text px-5 py-3 bg-transparent font-mono text-[10px] tracking-[0.15em] uppercase">{emailing === order.id ? "Sending…" : "Resend order email"}</button></div>
                     </div>
                   </div>
                 )}
