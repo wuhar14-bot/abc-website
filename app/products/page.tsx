@@ -51,7 +51,8 @@ export default function ProductsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5">
-        {PRODUCTS.map((p) => (
+        {/* Chalkemon remains implemented for a later restore, but is not listed publicly for now. */}
+        {PRODUCTS.filter((p) => p.href !== "/products/chalkemon").map((p) => (
           <Link key={p.href} href={p.href} className="no-underline block">
             <div className="product-card bg-abc-gray-card border border-abc-gray-line flex flex-col cursor-pointer overflow-hidden">
               <div className="relative aspect-[4/5] bg-abc-black overflow-hidden">

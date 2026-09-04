@@ -96,7 +96,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-0.5">
           <ProductCard
             href="/products/chalkemon"
             imageSrc="/images/chalkemon-card.png"
@@ -168,6 +168,9 @@ function ProductCard({
   tag: string;
   imgPosition?: string;
 }) {
+  // Chalkemon is temporarily hidden from the home collection while its
+  // product status is reviewed. Keep the component and route reversible.
+  if (href === "/products/chalkemon") return null;
   return (
     <Link href={href} className="no-underline block">
       <div className="product-card bg-abc-gray-card border border-abc-gray-line flex flex-col cursor-pointer overflow-hidden">

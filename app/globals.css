@@ -167,6 +167,12 @@ body::before {
   transition: color 150ms ease;
 }
 
+/* Chalkemon is temporarily unavailable from public navigation. The route and
+   assets remain intact so the product can be restored without data loss. */
+a[href="/products/chalkemon"] {
+  display: none !important;
+}
+
 .nav-link:hover {
   color: var(--white) !important;
 }
