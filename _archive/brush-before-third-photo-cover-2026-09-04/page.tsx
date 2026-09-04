@@ -7,9 +7,9 @@ import { useCart } from "@/lib/cart";
 // Photos are ordered by how clearly the AnythingButClimbing mark reads —
 // the first two are flat-on shots where the engraving is unambiguous.
 const PHOTOS = [
-  "/photos-brush/brush-03.jpg",
   "/photos-brush/brush-01.jpg",
   "/photos-brush/brush-02.jpg",
+  "/photos-brush/brush-03.jpg",
   "/photos-brush/brush-04.jpg",
   "/photos-brush/brush-05.jpg",
   "/photos-brush/brush-06.jpg",
