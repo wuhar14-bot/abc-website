@@ -41,6 +41,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       paid: true,
       email: session.customer_details?.email ?? null,
+      customer: {
+        name: session.collected_information?.shipping_details?.name ?? session.customer_details?.name ?? null,
+        phone: session.customer_details?.phone ?? null,
+      },
+      address: session.collected_information?.shipping_details?.address ?? session.customer_details?.address ?? null,
       amountTotal: session.amount_total,
       currency: session.currency,
       items,

@@ -124,6 +124,12 @@ function SuccessBody() {
                 Stripe receipt as proof of purchase.
             </p>
             <Link
+                href={`/orders/${sessionId}`}
+                className="btn-outline border border-abc-gray-mid text-abc-gray-text px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline font-semibold"
+            >
+                View Order Details
+            </Link>
+            <Link
                 href="/"
                 className="btn-red bg-abc-red text-white px-10 py-4 font-mono text-xs tracking-[0.2em] uppercase no-underline font-semibold"
             >

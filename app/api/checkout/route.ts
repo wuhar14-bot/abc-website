@@ -25,7 +25,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000";
 
 export async function POST(req: NextRequest) {
-  let body: { items?: IncomingItem[] };
+  let body: { items?: IncomingItem[]; receiptEmail?: string };
   try {
     body = await req.json();
   } catch {
@@ -35,6 +35,11 @@ export async function POST(req: NextRequest) {
   const items = body.items;
   if (!Array.isArray(items) || items.length === 0) {
     return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
+  }
+
+  const receiptEmail = typeof body.receiptEmail === "string" ? body.receiptEmail.trim() : "";
+  if (receiptEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(receiptEmail)) {
+    return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 });
   }
 
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
@@ -73,7 +78,10 @@ export async function POST(req: NextRequest) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      customer_creation: "always",
+      customer_email: receiptEmail || undefined,
       line_items: lineItems,
+      payment_intent_data: receiptEmail ? { receipt_email: receiptEmail } : undefined,
       metadata: {
         fulfillment_status: "unfulfilled",
       },

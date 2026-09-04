@@ -23,6 +23,7 @@ export default function CheckoutPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [receiptEmail, setReceiptEmail] = useState("");
 
     // Redirect if the cart is genuinely empty — but only AFTER localStorage has
     // been read. Redirecting before hydration throws away a real cart on any
@@ -40,7 +41,7 @@ export default function CheckoutPage() {
             const res = await fetch("/api/checkout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ items }),
+                body: JSON.stringify({ items, receiptEmail }),
             });
             const data = await res.json();
             if (!res.ok || !data.url) {
@@ -120,6 +121,19 @@ export default function CheckoutPage() {
                     <div className="mt-8 font-mono text-[10px] tracking-[0.12em] text-abc-gray-mid uppercase leading-relaxed">
                         Shipping address &amp; fees are collected on the next step (Stripe secure checkout). Payments are handled by Stripe — we never see your card details.
                     </div>
+
+                    <label className="mt-6 block">
+                        <span className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-subtle uppercase">Receipt email</span>
+                        <input
+                            type="email"
+                            value={receiptEmail}
+                            onChange={(event) => setReceiptEmail(event.target.value)}
+                            placeholder="you@example.com"
+                            required
+                            className="mt-2 w-full bg-abc-black border border-abc-gray-mid px-4 py-3 text-abc-white font-mono text-sm outline-none"
+                        />
+                        <span className="mt-2 block font-mono text-[10px] text-abc-gray-mid uppercase">Stripe will send your payment receipt here.</span>
+                    </label>
 
                     {error && (
                         <div className="mt-6 border border-abc-red/50 bg-abc-red/10 px-4 py-3 font-mono text-[11px] tracking-[0.1em] text-abc-red uppercase">
