@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, useCartHydrated } from "@/lib/cart";
+import { CURRENCY } from "@/lib/products";
+import { formatMoney } from "@/lib/currency";
 
 const PRODUCT_IMAGES: Record<string, string> = {
     chalkemon: "/images/chalkemon-card.png",
@@ -108,7 +110,7 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
                                 <div className="font-mono text-sm text-abc-red">
-                                    HK${item.price * item.qty}
+                                    {formatMoney(item.price * item.qty, CURRENCY)}
                                 </div>
                             </div>
                         ))}
@@ -158,7 +160,7 @@ export default function CheckoutPage() {
                         <span className="font-mono text-xs tracking-[0.15em] uppercase text-abc-gray-subtle">
                             Subtotal
                         </span>
-                        <span className="font-mono text-sm text-abc-gray-text">HK${total()}</span>
+                        <span className="font-mono text-sm text-abc-gray-text">{formatMoney(total(), CURRENCY)}</span>
                     </div>
                     <div className="font-mono text-[10px] tracking-[0.12em] text-abc-gray-mid uppercase mb-4">
                         Shipping calculated next step
@@ -168,7 +170,7 @@ export default function CheckoutPage() {
                             Total
                         </span>
                         <span className="font-mono text-lg text-abc-red font-bold">
-                            HK${total()}
+                            {formatMoney(total(), CURRENCY)}
                         </span>
                     </div>
                 </div>

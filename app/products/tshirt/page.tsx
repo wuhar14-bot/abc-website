@@ -15,23 +15,14 @@ const GALLERY = [
 ];
 
 const COLORS = [
-  { id: "black", name: "Black", hex: "#1a1a1a", border: "#444", img: "/images/tshirt-model-black.jpg", model: true, imgPosition: "center 26%" },
-  { id: "burgundy", name: "Burgundy", hex: "#6b1a1a", border: "#8b2a2a", img: "/images/tshirt-burgundy-5_focus.jpg", model: true, imgPosition: "center" },
-  { id: "navy", name: "Navy", hex: "#1a2a4a", border: "#2a3a5a", img: "/images/tshirt-spec-navy.png" },
-  { id: "armygreen", name: "Army Green", hex: "#3d4a2a", border: "#556b3a", img: "/images/tshirt-spec-armygreen.png" },
   { id: "blue", name: "Royal Blue", hex: "#1a44b8", border: "#2a55d0", img: "/images/tshirt/model-blue-01.jpg", model: true, imgPosition: "center" },
-  { id: "lightblue", name: "Sky Blue", hex: "#a9c9e8", border: "#c0d8f0", img: "/images/tshirt-spec-lightblue.png" },
-  { id: "gray", name: "Heather Gray", hex: "#8a8a8a", border: "#a0a0a0", img: "/images/tshirt-spec-gray.png" },
-  { id: "lightgray", name: "Light Gray", hex: "#d0d0d0", border: "#e0e0e0", img: "/images/tshirt-spec-lightgray.png" },
-  { id: "apricot", name: "Apricot", hex: "#ede4cf", border: "#f0e8d8", img: "/images/tshirt-spec-apricot.png" },
-  { id: "pink", name: "Pink", hex: "#f0c4cc", border: "#f5d5db", img: "/images/tshirt-spec-pink.png" },
 ];
 
 const FEATURES = [
   "Oversized streetwear fit",
   "Cotton + Sorona blend, soft & wrinkle-resistant",
   "AnythingButClimbing word-mark print",
-  "10 colorways available",
+  "Royal Blue production colorway",
 ];
 
 export default function TshirtPage() {
@@ -45,7 +36,7 @@ export default function TshirtPage() {
       id: `tshirt-${color.id}`,
       name: "ABC TEE",
       variant: `${color.name} / ${size}`,
-      price: 280,
+      price: 35,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
@@ -96,7 +87,7 @@ export default function TshirtPage() {
           </div>
 
           <div className="font-mono text-2xl text-abc-red mb-8">
-            HK$280
+            $35
           </div>
 
           <div className="text-sm text-abc-gray-text leading-relaxed max-w-[480px] mb-8">
@@ -172,11 +163,11 @@ export default function TshirtPage() {
               transition: "background 150ms ease",
             }}
           >
-            {added ? "✓ Added to Cart" : "Add to Cart — HK$280"}
+            {added ? "✓ Added to Cart" : "Add to Cart — $35"}
           </button>
 
           <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mt-4 text-center">
-            Free shipping HK · Worldwide from HK$120
+            Free shipping HK · Worldwide from $15
           </div>
         </div>
       </section>

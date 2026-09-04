@@ -15,9 +15,9 @@ const PHOTOS = [
   "/photos-brush/brush-06.jpg",
 ];
 
-// Intro price in HKD — must match BRUSH_PRICE in lib/products.ts or
+// Intro price in USD — must match BRUSH_PRICE in lib/products.ts or
 // checkout rejects the item as an invalid price.
-const PRICE = 150;
+const PRICE = 20;
 
 const FEATURES = [
   "Built-in fan clears chalk dust as you brush",
@@ -106,7 +106,7 @@ export default function BrushPage() {
           </div>
 
           <div className="font-mono text-2xl text-abc-red mb-8">
-            HK${PRICE}
+            ${PRICE}
 </div>
 
           <div className="text-sm text-abc-gray-text leading-relaxed max-w-[480px] mb-8">
@@ -138,11 +138,11 @@ export default function BrushPage() {
               transition: "background 150ms ease",
             }}
           >
-            {added ? "✓ Added to Cart" : `Add to Cart — HK$${PRICE}`}
+            {added ? "✓ Added to Cart" : `Add to Cart — $${PRICE}`}
           </button>
 
           <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mt-4 text-center">
-            Free shipping HK · Worldwide from HK$120
+            Free shipping HK · Worldwide from $15
           </div>
         </div>
       </section>

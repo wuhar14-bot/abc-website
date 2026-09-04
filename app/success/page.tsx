@@ -3,6 +3,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
+import { formatMinorMoney } from "@/lib/currency";
 
 type OrderState =
     | { status: "loading" }
@@ -17,8 +18,7 @@ type OrderState =
 
 function money(amount: number | null, currency: string | null) {
     if (amount === null) return "—";
-    const symbol = (currency ?? "hkd").toLowerCase() === "hkd" ? "HK$" : "";
-    return `${symbol}${(amount / 100).toFixed(2)}`;
+    return formatMinorMoney(amount, currency ?? "usd");
 }
 
 function SuccessBody() {

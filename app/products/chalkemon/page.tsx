@@ -10,7 +10,7 @@ const COLORWAYS = [
     name: "Sooty Boo",
     color: "#1a1a1a",
     border: "#444",
-    price: 380,
+    price: 48,
     photos: [
       "/photos-web/DSC01208.jpg",
       "/photos-web/DSC01237.jpg",
@@ -23,7 +23,7 @@ const COLORWAYS = [
     name: "Muddy Buddy",
     color: "#8B6914",
     border: "#c49a2a",
-    price: 420,
+    price: 54,
     photos: ["/photos-web/DSC01252.jpg"],
   },
   {
@@ -31,7 +31,7 @@ const COLORWAYS = [
     name: "Dolong Odo",
     color: "#c8c5c0",
     border: "#888",
-    price: 420,
+    price: 54,
     photos: ["/photos-web/DSC01256.jpg"],
   },
 ];
@@ -137,7 +137,7 @@ export default function ChalkemonPage() {
           </div>
 
           <div className="font-mono text-[26px] text-abc-red mb-8 font-bold">
-            HK${selected.price}
+            ${selected.price}
             {selected.id !== "sooty-boo" && (
               <span className="text-xs text-abc-gray-subtle ml-2">Limited Edition</span>
             )}
@@ -194,11 +194,11 @@ export default function ChalkemonPage() {
               transition: "background 150ms ease",
             }}
           >
-            {added ? "✓ Added to Cart" : `Add to Cart — HK$${selected.price}`}
+            {added ? "✓ Added to Cart" : `Add to Cart — $${selected.price}`}
           </button>
 
           <div className="font-mono text-[10px] tracking-[0.12em] text-abc-gray-mid uppercase text-center">
-            Free shipping HK · Worldwide from HK$120
+            Free shipping HK · Worldwide from $15
           </div>
         </div>
       </section>
@@ -283,7 +283,7 @@ export default function ChalkemonPage() {
                 {c.name}
               </div>
               <div className="font-mono text-xs text-abc-red mt-2">
-                HK${c.price}
+                ${c.price}
                 {c.id !== "sooty-boo" && (
                   <span className="text-[10px] text-abc-gray-subtle ml-2">Limited</span>
                 )}

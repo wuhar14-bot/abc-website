@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { formatMinorMoney } from "@/lib/currency";
 
 type Order = {
   id: string;
@@ -27,7 +28,7 @@ const STATUSES = ["unfulfilled", "processing", "shipped", "delivered", "cancelle
 
 function money(amount: number | null, currency: string | null) {
   if (amount === null) return "—";
-  return `${(currency ?? "hkd").toUpperCase()} ${(amount / 100).toFixed(2)}`;
+  return formatMinorMoney(amount, currency ?? "usd");
 }
 
 function addressText(address: Order["address"]) {
@@ -78,10 +79,14 @@ export default function AdminOrdersPage() {
     if (stored) loadOrders(stored);
   }, []);
 
-  const total = useMemo(
-    () => orders.reduce((sum, order) => sum + (order.amountTotal ?? 0), 0),
-    [orders]
-  );
+  const totalsByCurrency = useMemo(() => {
+    const totals = new Map<string, number>();
+    for (const order of orders) {
+      const currency = (order.currency ?? "unknown").toLowerCase();
+      totals.set(currency, (totals.get(currency) ?? 0) + (order.amountTotal ?? 0));
+    }
+    return [...totals.entries()];
+  }, [orders]);
 
   const handleLogin = (event: FormEvent) => {
     event.preventDefault();
@@ -160,7 +165,7 @@ export default function AdminOrdersPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-abc-gray-line mb-10">
         <div className="bg-abc-gray-card p-6"><div className="font-mono text-[10px] uppercase tracking-[0.2em] text-abc-gray-subtle">Paid Orders</div><div className="text-3xl font-black mt-2">{orders.length}</div></div>
-        <div className="bg-abc-gray-card p-6"><div className="font-mono text-[10px] uppercase tracking-[0.2em] text-abc-gray-subtle">Gross Total</div><div className="text-3xl font-black mt-2 text-abc-red">HK$ {(total / 100).toFixed(2)}</div></div>
+        <div className="bg-abc-gray-card p-6"><div className="font-mono text-[10px] uppercase tracking-[0.2em] text-abc-gray-subtle">Gross Total</div><div className="text-xl font-black mt-2 text-abc-red space-y-1">{totalsByCurrency.length === 0 ? "—" : totalsByCurrency.map(([currency, amount]) => <div key={currency}>{formatMinorMoney(amount, currency)}</div>)}</div></div>
         <div className="bg-abc-gray-card p-6"><div className="font-mono text-[10px] uppercase tracking-[0.2em] text-abc-gray-subtle">Needs Shipping</div><div className="text-3xl font-black mt-2">{orders.filter((order) => !["shipped", "delivered", "cancelled"].includes(order.fulfillmentStatus)).length}</div></div>
       </div>
 

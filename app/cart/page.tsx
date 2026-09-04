@@ -2,6 +2,8 @@
 import { useCart, useCartHydrated } from "@/lib/cart";
 import Link from "next/link";
 import Image from "next/image";
+import { CURRENCY } from "@/lib/products";
+import { formatMoney } from "@/lib/currency";
 
 const PRODUCT_IMAGES: Record<string, string> = {
   chalkemon: "/images/chalkemon-card.png",
@@ -99,7 +101,7 @@ export default function CartPage() {
             </div>
 
             <div className="font-mono text-abc-red text-base min-w-20 text-right">
-              HK${item.price * item.qty}
+              {formatMoney(item.price * item.qty, CURRENCY)}
             </div>
 
             <button
@@ -118,7 +120,7 @@ export default function CartPage() {
             Subtotal
           </span>
           <span className="font-mono text-xl text-abc-red font-bold">
-            HK${total()}
+            {formatMoney(total(), CURRENCY)}
           </span>
         </div>
         <div className="font-mono text-[10px] tracking-[0.15em] text-abc-gray-mid uppercase mb-6">

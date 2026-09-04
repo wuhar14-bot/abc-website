@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { currentPriceForId } from "@/lib/products";
 
 export type CartItem = {
   id: string;
@@ -96,6 +97,23 @@ export function useCartHydrated() {
     const unsubFinish = persistApi.onFinishHydration(() => setHydrated(true));
     // Covers the case where hydration already finished before we subscribed.
     setHydrated(persistApi.hasHydrated());
+    if (persistApi.hasHydrated()) {
+      useCart.setState((state) => ({
+        items: state.items
+          .map((item) => {
+            const currentPrice = currentPriceForId(item.id);
+            if (currentPrice !== null) return { ...item, price: currentPrice };
+            if (item.id === "chalkemon") {
+              return { ...item, price: item.price <= 380 ? 48 : 54 };
+            }
+            // Remove discontinued colorways so an old persisted cart cannot
+            // reach checkout with a SKU that is no longer sold.
+            if (item.id.startsWith("tshirt-")) return null;
+            return item;
+          })
+          .filter((item): item is CartItem => item !== null),
+      }));
+    }
     return unsubFinish;
   }, []);
 

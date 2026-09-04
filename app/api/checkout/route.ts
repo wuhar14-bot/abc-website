@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       quantity: qty,
       price_data: {
         currency: CURRENCY,
-        unit_amount: unitPrice * 100, // HKD dollars -> cents
+        unit_amount: unitPrice * 100, // USD dollars -> cents
         product_data: {
           name: item.name || item.id,
           description: item.variant || undefined,
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
           "DE", "FR", "NL", "MY", "TH", "KR", "NZ",
         ],
       },
-      // Region-based flat shipping (mirrors the planned HK free / intl HK$120).
+      // Region-based flat shipping: Hong Kong free, international US$15.
       shipping_options: [
         {
           shipping_rate_data: {
@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
           shipping_rate_data: {
             type: "fixed_amount",
             display_name: "International",
-            fixed_amount: { amount: 120 * 100, currency: CURRENCY },
+            fixed_amount: { amount: 15 * 100, currency: CURRENCY },
             delivery_estimate: {
               minimum: { unit: "business_day", value: 7 },
               maximum: { unit: "business_day", value: 21 },

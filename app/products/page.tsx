@@ -16,7 +16,7 @@ const PRODUCTS: {
     imageSrc: "/images/chalkemon-card.png",
     label: "CHALKEMON™",
     sub: "Chalk Bag",
-    price: "HK$380",
+    price: "$48",
     tag: "BESTSELLER",
   },
   {
@@ -24,7 +24,7 @@ const PRODUCTS: {
     imageSrc: "/images/tshirt/model-blue-01.jpg",
     label: "ABC TEE",
     sub: "T-Shirt",
-    price: "HK$280",
+    price: "$35",
     tag: "LIMITED",
     imgPosition: "center",
   },
@@ -33,7 +33,7 @@ const PRODUCTS: {
     imageSrc: "/photos-brush/brush-01.jpg",
     label: "ABC BRUSH",
     sub: "Electric Chalk Brush",
-    price: "HK$150",
+    price: "$20",
     tag: "NEW",
   },
 ];

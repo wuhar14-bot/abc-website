@@ -102,7 +102,7 @@ export default function Home() {
             imageSrc="/images/chalkemon-card.png"
             label="CHALKEMON™"
             sub="Chalk Bag"
-            price="HK$380"
+            price="$48"
             tag="BESTSELLER"
           />
           <ProductCard
@@ -110,7 +110,7 @@ export default function Home() {
             imageSrc="/images/tshirt/model-blue-01.jpg"
             label="ABC TEE"
             sub="T-Shirt"
-            price="HK$280"
+            price="$35"
             tag="LIMITED"
             imgPosition="center"
           />
